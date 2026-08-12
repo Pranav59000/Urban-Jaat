@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="hi-en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Urban Jaat — Dost Nahi Utha Rahe Phone? Hum Hai Na.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F3E9D2;
+    --paper:#FBF5E6;
+    --ink:#221D13;
+    --olive:#3C3B1F;
+    --olive-dark:#242310;
+    --mustard:#DFA623;
+    --mustard-light:#F0C662;
+    --rust:#B8420F;
+    --rust-dark:#8E3009;
+    --maroon:#651C1C;
+    --khaki:#B9A868;
+    --line:rgba(34,29,19,0.14);
+    --shadow:0 10px 30px rgba(34,29,19,0.18);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--cream);
+    color:var(--ink);
+    font-family:'Poppins', sans-serif;
+    overflow-x:hidden;
+    background-image:
+      radial-gradient(circle at 10% 8%, rgba(184,66,15,0.06), transparent 40%),
+      radial-gradient(circle at 92% 18%, rgba(60,59,31,0.07), transparent 45%);
+  }
+  ::selection{background:var(--mustard); color:var(--ink);}
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  button{font-family:inherit; cursor:pointer; border:none;}
+  input{font-family:inherit;}
+  :focus-visible{outline:3px solid var(--rust); outline-offset:2px;}
+
+  .display{font-family:'Anton', sans-serif; letter-spacing:0.5px; text-transform:uppercase;}
+  .accent-font{font-family:'Baloo 2', sans-serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700;
+    font-size:12.5px;
+    letter-spacing:2.5px;
+    text-transform:uppercase;
+    color:var(--rust-dark);
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:26px; height:2px; background:var(--rust-dark); display:inline-block;}
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:60;
+    background:var(--olive-dark);
+    border-bottom:3px solid var(--mustard);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px; max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    display:flex; align-items:center; gap:10px;
+    color:var(--cream);
+  }
+  .logo-badge{
+    width:38px; height:38px; border-radius:8px;
+    background:var(--mustard);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px; transform:rotate(-6deg);
+    box-shadow:3px 3px 0 var(--rust);
+  }
+  .logo-text{font-family:'Anton', sans-serif; font-size:22px; letter-spacing:1px; color:var(--cream);}
+  .logo-text span{color:var(--mustard);}
+  nav ul{list-style:none; display:flex; gap:32px;}
+  nav a{
+    color:var(--cream); font-weight:600; font-size:14.5px;
+    opacity:0.88; position:relative; padding:4px 0;
+  }
+  nav a:hover{opacity:1;}
+  nav a::after{
+    content:""; position:absolute; left:0; bottom:-2px; width:0; height:2px;
+    background:var(--mustard); transition:width 0.25s ease;
+  }
+  nav a:hover::after{width:100%;}
+  .header-right{display:flex; align-items:center; gap:18px;}
+  .cart-btn{
+    position:relative; background:var(--mustard); color:var(--ink);
+    width:44px; height:44px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center;
+    font-size:19px; box-shadow:3px 3px 0 var(--rust-dark);
+    transition:transform 0.15s ease;
+  }
+  .cart-btn:hover{transform:translate(-2px,-2px); box-shadow:5px 5px 0 var(--rust-dark);}
+  .cart-count{
+    position:absolute; top:-8px; right:-8px;
+    background:var(--rust); color:#fff; font-family:'JetBrains Mono',monospace;
+    font-weight:700; font-size:11px; min-width:20px; height:20px; border-radius:10px;
+    display:flex; align-items:center; justify-content:center; padding:0 4px;
+    border:2px solid var(--olive-dark);
+  }
+
+  /* ---------- MARQUEE ---------- */
+  .marquee{
+    background:var(--rust); color:var(--cream); overflow:hidden;
+    border-bottom:3px solid var(--olive-dark);
+    white-space:nowrap;
+  }
+  .marquee-track{
+    display:inline-block; padding:8px 0;
+    font-family:'JetBrains Mono', monospace; font-size:13px; font-weight:700; letter-spacing:1px;
+    animation:scrollLeft 26s linear infinite;
+  }
+  .marquee-track span{margin:0 26px;}
+  @keyframes scrollLeft{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(-50%);}
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:88px 28px 70px;
+    background:
+      linear-gradient(180deg, var(--olive) 0%, var(--olive-dark) 100%);
+    color:var(--cream);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:repeating-linear-gradient(115deg, rgba(223,166,35,0.05) 0px, rgba(223,166,35,0.05) 2px, transparent 2px, transparent 34px);
+    pointer-events:none;
+  }
+  .dust{position:absolute; border-radius:50%; background:var(--mustard); opacity:0.35; filter:blur(1px); animation:float 9s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translateY(0);} 50%{transform:translateY(-18px);}}
+
+  .hero-inner{
+    max-width:1180px; margin:0 auto; position:relative; z-index:2;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:50px; align-items:center;
+  }
+  .hero-eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    background:rgba(223,166,35,0.14); border:1px solid rgba(223,166,35,0.5);
+    color:var(--mustard-light); padding:7px 14px; border-radius:100px;
+    font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; letter-spacing:1.5px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(34px, 5.4vw, 60px);
+    line-height:1.05;
+    margin-bottom:10px;
+  }
+  .hero h1 .line2{color:var(--mustard);}
+  .hero-hindi{
+    font-family:'Baloo 2', sans-serif; font-weight:700;
+    font-size:clamp(20px, 2.6vw, 28px);
+    color:var(--cream); opacity:0.92; margin:18px 0 14px;
+  }
+  .hero p.sub{
+    font-size:16.5px; line-height:1.65; color:rgba(243,233,210,0.82);
+    max-width:520px; margin-bottom:32px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:15px 26px; border-radius:10px; font-weight:700; font-size:15px;
+    transition:transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn-primary{
+    background:var(--mustard); color:var(--ink);
+    box-shadow:4px 4px 0 var(--rust-dark);
+  }
+  .btn-primary:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--rust-dark);}
+  .btn-ghost{
+    background:transparent; color:var(--cream); border:2px solid rgba(243,233,210,0.4);
+  }
+  .btn-ghost:hover{border-color:var(--mustard); color:var(--mustard-light);}
+
+  .hero-card{
+    background:var(--paper); border-radius:18px; padding:26px;
+    box-shadow:var(--shadow); border:3px solid var(--ink);
+    transform:rotate(2deg);
+    position:relative;
+  }
+  .hero-card::before{
+    content:"CASE FILE";
+    position:absolute; top:-14px; left:22px;
+    background:var(--rust); color:#fff; font-family:'JetBrains Mono',monospace;
+    font-size:11px; font-weight:700; letter-spacing:2px; padding:5px 12px; border-radius:6px;
+  }
+  .hero-card h3{font-family:'Anton'; font-size:19px; margin-bottom:12px; color:var(--maroon);}
+  .hero-card ul{list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .hero-card li{display:flex; gap:10px; font-size:14px; align-items:flex-start; line-height:1.5;}
+  .hero-card li b{color:var(--rust-dark);}
+
+  /* ---------- STATS ---------- */
+  .stats{
+    background:var(--mustard);
+    border-bottom:3px solid var(--ink);
+  }
+  .stats-inner{
+    max-width:1180px; margin:0 auto; padding:22px 28px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px; text-align:center;
+  }
+  .stat b{display:block; font-family:'Anton'; font-size:clamp(22px,3vw,32px); color:var(--ink);}
+  .stat span{font-size:12.5px; font-weight:600; color:var(--olive-dark); letter-spacing:0.3px;}
+
+  /* ---------- SECTION HEADERS ---------- */
+  section{padding:86px 0;}
+  .sec-head{max-width:640px; margin-bottom:50px;}
+  .sec-head h2{font-size:clamp(28px,4vw,42px); margin-top:12px; line-height:1.1;}
+  .sec-head p{margin-top:14px; font-size:15.5px; color:rgba(34,29,19,0.72); line-height:1.6;}
+
+  /* ---------- SERVICES ---------- */
+  .services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .svc-card{
+    background:var(--paper); border-radius:20px; border:2.5px solid var(--ink);
+    padding:28px 24px 26px; position:relative; overflow:hidden;
+    display:flex; flex-direction:column;
+    box-shadow:6px 6px 0 rgba(34,29,19,0.12);
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .svc-card:hover{transform:translateY(-6px); box-shadow:8px 10px 0 rgba(34,29,19,0.16);}
+  .svc-card.tier-3{background:linear-gradient(165deg, var(--paper) 60%, #F2DCA6 100%);}
+  .svc-num{
+    position:absolute; top:-6px; right:14px;
+    font-family:'Anton'; font-size:74px; color:rgba(34,29,19,0.06); line-height:1;
+  }
+  .svc-top{display:flex; align-items:center; gap:12px; margin-bottom:6px;}
+  .svc-emoji{font-size:30px;}
+  .svc-title{font-family:'Anton'; font-size:22px; letter-spacing:0.4px;}
+  .svc-hindi{font-family:'Baloo 2'; font-weight:700; font-size:14px; color:var(--rust-dark); margin-bottom:14px;}
+  .svc-tagline{font-size:14.5px; line-height:1.6; color:rgba(34,29,19,0.8); margin-bottom:18px; min-height:66px;}
+
+  .gauge-wrap{display:flex; flex-direction:column; align-items:center; margin:6px 0 18px;}
+  .gauge-label{
+    font-family:'JetBrains Mono'; font-size:11.5px; font-weight:700; letter-spacing:1px;
+    margin-top:2px; padding:4px 10px; border-radius:100px; background:var(--olive-dark); color:var(--mustard-light);
+  }
+
+  .svc-includes{list-style:none; display:flex; flex-direction:column; gap:9px; margin-bottom:22px; flex-grow:1;}
+  .svc-includes li{display:flex; gap:8px; font-size:13.5px; align-items:flex-start; line-height:1.45;}
+  .svc-includes li::before{content:"✓"; color:var(--rust-dark); font-weight:700; flex-shrink:0;}
+
+  .svc-bottom{border-top:1.5px dashed var(--line); padding-top:18px; display:flex; align-items:center; justify-content:space-between; gap:12px;}
+  .svc-price{font-family:'Anton'; font-size:26px;}
+  .svc-price span{font-family:'JetBrains Mono'; font-size:11px; font-weight:600; color:rgba(34,29,19,0.55); display:block; text-transform:uppercase; letter-spacing:1px;}
+
+  .add-btn{
+    background:var(--ink); color:var(--cream); padding:11px 18px; border-radius:9px;
+    font-weight:700; font-size:13.5px; white-space:nowrap;
+    transition:background 0.15s ease, transform 0.15s ease;
+  }
+  .add-btn:hover{background:var(--rust-dark); transform:translateY(-2px);}
+  .add-btn.added{background:var(--olive);}
+  .qty-stepper{display:flex; align-items:center; gap:10px; background:var(--ink); border-radius:9px; padding:6px 10px;}
+  .qty-stepper button{background:none; color:var(--cream); font-size:16px; font-weight:700; width:20px;}
+  .qty-stepper span{color:var(--mustard-light); font-family:'JetBrains Mono'; font-weight:700; min-width:14px; text-align:center;}
+
+  /* ---------- HOW IT WORKS ---------- */
+  .how{background:var(--olive-dark); color:var(--cream);}
+  .how .sec-head p{color:rgba(243,233,210,0.72);}
+  .how .eyebrow{color:var(--mustard-light);}
+  .how .eyebrow::before{background:var(--mustard-light);}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .step{
+    background:rgba(243,233,210,0.05); border:1.5px solid rgba(243,233,210,0.14);
+    border-radius:16px; padding:28px 24px; position:relative;
+  }
+  .step-num{
+    font-family:'Anton'; font-size:15px; color:var(--olive-dark); background:var(--mustard);
+    width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center;
+    margin-bottom:18px;
+  }
+  .step h3{font-family:'Anton'; font-size:19px; margin-bottom:10px; letter-spacing:0.3px;}
+  .step p{font-size:14px; line-height:1.6; color:rgba(243,233,210,0.75);}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .reviews-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .review-card{
+    background:var(--paper); border:2px solid var(--ink); border-radius:16px; padding:24px;
+    box-shadow:5px 5px 0 rgba(34,29,19,0.1);
+  }
+  .stars{color:var(--rust-dark); font-size:15px; margin-bottom:12px; letter-spacing:2px;}
+  .review-text{font-size:14.5px; line-height:1.65; color:rgba(34,29,19,0.85); margin-bottom:16px;}
+  .review-who{display:flex; align-items:center; gap:10px;}
+  .review-avatar{
+    width:38px; height:38px; border-radius:50%; background:var(--olive); color:var(--mustard-light);
+    display:flex; align-items:center; justify-content:center; font-family:'Anton'; font-size:15px;
+  }
+  .review-name{font-weight:700; font-size:13.5px;}
+  .review-loc{font-size:12px; color:rgba(34,29,19,0.55);}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--ink); color:rgba(243,233,210,0.8); padding:56px 0 26px;}
+  .footer-top{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; padding-bottom:36px; border-bottom:1px solid rgba(243,233,210,0.14);}
+  .footer-logo{display:flex; align-items:center; gap:10px; margin-bottom:14px;}
+  .footer-logo .logo-text{color:var(--cream);}
+  .footer-blurb{font-size:13.5px; line-height:1.7; max-width:340px; color:rgba(243,233,210,0.6);}
+  .footer-col h4{font-family:'JetBrains Mono'; font-size:12px; letter-spacing:1.5px; color:var(--mustard-light); margin-bottom:16px; text-transform:uppercase;}
+  .footer-col ul{list-style:none; display:flex; flex-direction:column; gap:10px;}
+  .footer-col a{font-size:13.5px; color:rgba(243,233,210,0.7);}
+  .footer-col a:hover{color:var(--mustard-light);}
+  .footer-bottom{display:flex; justify-content:space-between; align-items:center; padding-top:22px; flex-wrap:wrap; gap:12px;}
+  .footer-bottom p{font-size:12px; color:rgba(243,233,210,0.45);}
+  .disclaimer{font-size:11.5px; color:rgba(243,233,210,0.4); max-width:560px; line-height:1.6;}
+
+  /* ---------- CART DRAWER ---------- */
+  .overlay{
+    position:fixed; inset:0; background:rgba(34,29,19,0.55); z-index:90;
+    opacity:0; pointer-events:none; transition:opacity 0.25s ease;
+  }
+  .overlay.open{opacity:1; pointer-events:auto;}
+  .drawer{
+    position:fixed; top:0; right:0; height:100%; width:min(420px,92vw);
+    background:var(--paper); z-index:95; box-shadow:-8px 0 30px rgba(0,0,0,0.25);
+    transform:translateX(100%); transition:transform 0.3s ease;
+    display:flex; flex-direction:column;
+  }
+  .drawer.open{transform:translateX(0);}
+  .drawer-head{
+    background:var(--olive-dark); color:var(--cream); padding:20px 22px;
+    display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid var(--mustard);
+  }
+  .drawer-head h3{font-family:'Anton'; font-size:19px; letter-spacing:0.4px;}
+  .drawer-close{background:none; color:var(--cream); font-size:22px; width:32px; height:32px; border-radius:8px;}
+  .drawer-close:hover{background:rgba(243,233,210,0.12);}
+  .drawer-body{flex:1; overflow-y:auto; padding:20px 22px; display:flex; flex-direction:column; gap:16px;}
+  .cart-empty{text-align:center; padding:50px 10px; color:rgba(34,29,19,0.5);}
+  .cart-empty .emoji{font-size:44px; margin-bottom:14px;}
+  .cart-item{display:flex; gap:12px; border-bottom:1px dashed var(--line); padding-bottom:16px;}
+  .cart-item-emoji{width:46px; height:46px; border-radius:10px; background:var(--olive-dark); display:flex; align-items:center; justify-content:center; font-size:21px; flex-shrink:0;}
+  .cart-item-info{flex:1;}
+  .cart-item-info h4{font-size:14.5px; font-weight:700; margin-bottom:4px;}
+  .cart-item-info .price{font-family:'JetBrains Mono'; font-size:13px; color:var(--rust-dark); font-weight:700;}
+  .cart-item-actions{display:flex; align-items:center; justify-content:space-between; margin-top:8px;}
+  .remove-btn{font-size:12px; color:rgba(34,29,19,0.45); font-weight:600;}
+  .remove-btn:hover{color:var(--rust);}
+  .drawer-foot{padding:20px 22px; border-top:2px solid var(--line); background:var(--cream);}
+  .subtotal-row{display:flex; justify-content:space-between; font-size:14px; margin-bottom:6px; color:rgba(34,29,19,0.65);}
+  .total-row{display:flex; justify-content:space-between; font-family:'Anton'; font-size:22px; margin:10px 0 16px;}
+  .checkout-btn{width:100%; background:var(--rust); color:#fff; padding:15px; border-radius:10px; font-weight:700; font-size:15px; box-shadow:4px 4px 0 var(--maroon);}
+  .checkout-btn:hover{transform:translate(-2px,-2px); box-shadow:6px 6px 0 var(--maroon);}
+  .checkout-btn:disabled{opacity:0.4; box-shadow:none; cursor:not-allowed;}
+
+  /* ---------- CHECKOUT MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(34,29,19,0.65); z-index:100;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity 0.25s ease;
+  }
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal{
+    background:var(--paper); border-radius:20px; max-width:520px; width:100%;
+    max-height:88vh; overflow-y:auto; border:3px solid var(--ink);
+    transform:translateY(16px) scale(0.98); transition:transform 0.25s ease;
+  }
+  .modal-overlay.open .modal{transform:translateY(0) scale(1);}
+  .modal-head{
+    background:var(--olive-dark); color:var(--cream); padding:20px 26px;
+    display:flex; align-items:center; justify-content:space-between; border-bottom:3px solid var(--mustard);
+    position:sticky; top:0;
+  }
+  .modal-head h3{font-family:'Anton'; font-size:19px;}
+  .modal-close{background:none; color:var(--cream); font-size:22px; width:32px; height:32px; border-radius:8px;}
+  .modal-close:hover{background:rgba(243,233,210,0.12);}
+  .modal-steps{display:flex; gap:6px; padding:16px 26px 0;}
+  .modal-steps .dot{flex:1; height:5px; border-radius:4px; background:var(--line);}
+  .modal-steps .dot.active{background:var(--rust);}
+  .modal-body{padding:24px 26px 28px;}
+
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:12.5px; font-weight:700; margin-bottom:7px; color:var(--olive-dark); letter-spacing:0.3px;}
+  .field input{
+    width:100%; padding:12px 14px; border-radius:9px; border:1.5px solid var(--line);
+    background:#fff; font-size:14px; color:var(--ink);
+  }
+  .field input:focus{border-color:var(--rust);}
+  .field-row{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+
+  .review-line{display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px dashed var(--line); font-size:14px;}
+  .review-line b{font-family:'JetBrains Mono';}
+
+  .confirm-box{text-align:center; padding:10px 0 6px;}
+  .confirm-tick{
+    width:70px; height:70px; border-radius:50%; background:var(--olive); color:var(--mustard-light);
+    display:flex; align-items:center; justify-content:center; font-size:34px; margin:0 auto 18px;
+    animation:pop 0.4s ease;
+  }
+  @keyframes pop{0%{transform:scale(0);} 70%{transform:scale(1.12);} 100%{transform:scale(1);}}
+  .confirm-box h4{font-family:'Anton'; font-size:22px; margin-bottom:10px;}
+  .confirm-box p{font-size:14px; color:rgba(34,29,19,0.7); line-height:1.6; margin-bottom:6px;}
+  .order-id{
+    font-family:'JetBrains Mono'; font-weight:700; background:var(--olive-dark); color:var(--mustard-light);
+    display:inline-block; padding:8px 16px; border-radius:8px; margin:14px 0 20px; font-size:14px;
+  }
+
+  .modal-actions{display:flex; gap:12px; margin-top:22px;}
+  .btn-secondary{flex:1; background:transparent; border:1.5px solid var(--ink); color:var(--ink); padding:13px; border-radius:9px; font-weight:700; font-size:14px;}
+  .btn-secondary:hover{background:rgba(34,29,19,0.05);}
+  .btn-full{flex:1; background:var(--rust); color:#fff; padding:13px; border-radius:9px; font-weight:700; font-size:14px; box-shadow:3px 3px 0 var(--maroon);}
+  .btn-full:hover{transform:translate(-1px,-1px); box-shadow:4px 4px 0 var(--maroon);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:920px){
+    .hero-inner{grid-template-columns:1fr;}
+    .hero-card{transform:none; margin-top:10px;}
+    .services-grid, .steps, .reviews-grid{grid-template-columns:1fr;}
+    .stats-inner{grid-template-columns:repeat(2,1fr);}
+    .footer-top{grid-template-columns:1fr;}
+    nav{display:none;}
+  }
+  @media (max-width:520px){
+    .field-row{grid-template-columns:1fr;}
+    .hero{padding:64px 20px 50px;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  /* ===================== JAAT ANTHEM RADIO ===================== */
+  .radio-widget{
+    position:fixed; left:20px; bottom:20px; z-index:70;
+    display:flex; align-items:center; gap:0;
+  }
+  .radio-btn{
+    display:flex; align-items:center; gap:10px;
+    background:var(--olive); color:var(--mustard-light);
+    border:2px solid var(--ink); border-radius:999px;
+    padding:12px 18px 12px 14px;
+    box-shadow:var(--shadow);
+    font-family:'JetBrains Mono', monospace; font-weight:700;
+    font-size:12.5px; letter-spacing:1px; text-transform:uppercase;
+    transition:transform .2s ease, background .2s ease;
+  }
+  .radio-btn:hover{transform:translateY(-3px);}
+  .radio-btn.playing{background:var(--rust-dark); color:var(--paper);}
+  .radio-icon{
+    width:30px; height:30px; border-radius:50%;
+    background:var(--mustard); color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    font-size:14px; flex:none;
+  }
+  .radio-icon.spin{animation:spin-disc 2.4s linear infinite;}
+  @keyframes spin-disc{ to{ transform:rotate(360deg);} }
+  .radio-bars{display:flex; align-items:flex-end; gap:2px; height:14px; margin-left:2px;}
+  .radio-bars span{
+    width:3px; background:var(--mustard-light); border-radius:2px;
+    height:4px; opacity:0.5;
+  }
+  .radio-btn.playing .radio-bars span{
+    opacity:1; animation:bar-bounce 0.9s ease-in-out infinite;
+  }
+  .radio-btn.playing .radio-bars span:nth-child(1){animation-delay:0s;}
+  .radio-btn.playing .radio-bars span:nth-child(2){animation-delay:.2s;}
+  .radio-btn.playing .radio-bars span:nth-child(3){animation-delay:.4s;}
+  @keyframes bar-bounce{
+    0%,100%{height:4px;} 50%{height:14px;}
+  }
+  @media (max-width:520px){
+    .radio-widget{left:14px; bottom:14px;}
+    .radio-btn{padding:10px 14px 10px 12px; font-size:11px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header>
+  <div class="nav-inner">
+    <div class="logo">
+      <div class="logo-badge">🚜</div>
+      <div class="logo-text">URBAN <span>JAAT</span></div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#services">Sewayein</a></li>
+        <li><a href="#how">Kaise Kaam Karta Hai</a></li>
+        <li><a href="#reviews">Reviews</a></li>
+      </ul>
+    </nav>
+    <div class="header-right">
+      <button class="btn btn-primary" style="padding:10px 18px; font-size:13.5px;" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Book Karo</button>
+      <button class="cart-btn" onclick="openDrawer()" aria-label="Open cart">
+        🛒
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<audio id="anthemAudio" src="jaat-anthem.mp3" loop preload="none"></audio>
+<div class="radio-widget">
+  <button class="radio-btn" id="radioBtn" onclick="toggleAnthem()" aria-pressed="false">
+    <span class="radio-icon" id="radioIcon">📻</span>
+    <span id="radioLabel">Jaat Anthem</span>
+    <span class="radio-bars"><span></span><span></span><span></span></span>
+  </button>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>🚜 FREE THAR ENTRY WITH 36 BIRADRI PACKAGE</span>
+    <span>📞 SAME-DAY PANCHAYAT GUARANTEED</span>
+    <span>🥊 KOI BHI JHAGDA, HUM SAMBHAL LENGE</span>
+    <span>🌾 100% DESI, 0% DOSTON PE BHAROSA</span>
+    <span>🚜 FREE THAR ENTRY WITH 36 BIRADRI PACKAGE</span>
+    <span>📞 SAME-DAY PANCHAYAT GUARANTEED</span>
+    <span>🥊 KOI BHI JHAGDA, HUM SAMBHAL LENGE</span>
+    <span>🌾 100% DESI, 0% DOSTON PE BHAROSA</span>
+  </div>
+</div>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="dust" style="width:10px; height:10px; top:20%; left:8%;"></div>
+  <div class="dust" style="width:6px; height:6px; top:60%; left:16%; animation-delay:2s;"></div>
+  <div class="dust" style="width:8px; height:8px; top:35%; left:88%; animation-delay:1s;"></div>
+  <div class="dust" style="width:12px; height:12px; top:75%; left:80%; animation-delay:3s;"></div>
+
+  <div class="wrap hero-inner">
+    <div>
+      <div class="hero-eyebrow">⚠️ JAB DOSTON KA PHONE BUSY HO</div>
+      <h1 class="display">
+        <div>DOST NAHI UTHA RAHE</div>
+        <div class="line2">PHONE?</div>
+      </h1>
+      <div class="hero-hindi accent-font">हम हैं ना, मदद के लिए. 🫡</div>
+      <p class="sub">Har mohalle mein ek problem hoti hai jo "sirf ek dhamki" ya "thoda samjhana" maangti hai — aur tab dost gayab ho jaate hain. Ab nahi. Ek click mein apna Jaat book karo, panchayat se lekar poori biradri tak, jaisi zaroorat waisi entry.</p>
+      <div class="hero-ctas">
+        <button class="btn btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Apna Jaat Book Karo →</button>
+        <button class="btn btn-ghost" onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'})">Kaise Kaam Karta Hai</button>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>AAJ KA CASE</h3>
+      <ul>
+        <li>📍 <span><b>Problem:</b> Padosi ne car ke saamne bike khadi kar di, teesri baar.</span></li>
+        <li>📞 <span><b>Dost Response:</b> "Bhai busy hu, kal baat karta hu."</span></li>
+        <li>🚜 <span><b>Urban Jaat Response:</b> 22 minute mein site pe. Chai bhi khatam nahi hui.</span></li>
+        <li>✅ <span><b>Result:</b> Bike ab seedhi khadi hoti hai. Har din.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<div class="stats">
+  <div class="wrap stats-inner">
+    <div class="stat"><b>4,812+</b><span>Jhagde Suljhaye</span></div>
+    <div class="stat"><b>18 Min</b><span>औसत Response Time</span></div>
+    <div class="stat"><b>0</b><span>Panchayat Haari</span></div>
+    <div class="stat"><b>36</b><span>Biradri Ready On-Call</span></div>
+  </div>
+</div>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">HAMARI SEWAYEIN</div>
+      <h2 class="display">Apna Jaat Chuno</h2>
+      <p>Teen level, teeno guaranteed. Jitna bada jhagda, utna bada squad — <b>Danga-Meter</b> dekh kar decide karo kaunsa level tumhare case ke liye sahi hai.</p>
+    </div>
+
+    <div class="services-grid" id="servicesGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">PROCESS</div>
+      <h2 class="display">Kaise Kaam Karta Hai</h2>
+      <p>Urban Company jitna hi simple. Bas dosti ki jagah dabang bharosa.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Apna Jaat Chuno</h3>
+        <p>Cart mein daalo, address bharo, order confirm karo. Jaise chaha waisa level select karo — Sulah se lekar Danga tak.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Jaat Nikal Pada</h3>
+        <p>Order confirm hote hi tumhara Jaat (ya poori biradri) location ke liye nikal padta hai. ETA: jitni der mein ek kadak chai banti hai.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Maamla Nipat Gaya</h3>
+        <p>Baat ho, dhamki ho ya seedha maidan — case close hoke hi Jaat wapas jaata hai. Follow-up call free hai.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== REVIEWS ===================== -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">JANTA KA FAISLA</div>
+      <h2 class="display">Log Kya Keh Rahe Hain</h2>
+      <p>Real problems, real Jaats, real results. (Naam badle gaye hain, josh nahi.)</p>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Landlord 3 mahine se deposit nahi de raha tha. Compromise Jaat gaya, chai pi, samjhaya — agle din paisa account mein tha. Bina ek muka chale."</p>
+        <div class="review-who">
+          <div class="review-avatar">R</div>
+          <div><div class="review-name">Rohit S.</div><div class="review-loc">Rohini, Delhi</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Society ke parking wale bhaisaab ko sirf Aggressive Jaat ki entry dikhni thi, baat karne ki zaroorat hi nahi padi. Ab meri gaadi ka spot fix hai."</p>
+        <div class="review-who">
+          <div class="review-avatar">P</div>
+          <div><div class="review-name">Priya M.</div><div class="review-loc">Gurugram</div></div>
+        </div>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p class="review-text">"Shaadi mein caterer ne last moment cancel kiya. 36 Biradri Jaat squad Thar aur tractor-trolley leke pahuncha — caterer khud khana bana raha tha 2 ghante mein."</p>
+        <div class="review-who">
+          <div class="review-avatar">V</div>
+          <div><div class="review-name">Vikram T.</div><div class="review-loc">Sonipat</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo">
+          <div class="logo-badge">🚜</div>
+          <div class="logo-text">URBAN <span style="color:var(--mustard)">JAAT</span></div>
+        </div>
+        <p class="footer-blurb">Dost nahi utha rahe phone? Hum hai na, madad ke liye. Sulah se lekar poori 36 biradri tak — jitni zaroorat, utna Jaat.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Sewayein</h4>
+        <ul>
+          <li><a href="#services">Compromise Jaat</a></li>
+          <li><a href="#services">Aggressive Jaat</a></li>
+          <li><a href="#services">36 Biradri Jaat</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#how">Kaise Kaam Karta Hai</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#services">Book Karo</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="disclaimer">Urban Jaat ek satirical, kalpanik concept hai — sirf hansi-mazak aur design demo ke liye. Ye asli service nahi hai, koi bhi "Jaat" dispatch nahi hota. Please apne jhagde sulah aur kanoon se hi suljhayein.</p>
+      <p>© 2026 Urban Jaat. Sab haq mehfooz.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ===================== CART DRAWER ===================== -->
+<div class="overlay" id="overlay" onclick="closeDrawer(); closeModal();"></div>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-head">
+    <h3>🛒 Tera Cart</h3>
+    <button class="drawer-close" onclick="closeDrawer()">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+  <div class="drawer-foot" id="drawerFoot" style="display:none;">
+    <div class="subtotal-row"><span>Subtotal</span><span id="subtotalVal">₹0</span></div>
+    <div class="subtotal-row"><span>Diesel &amp; Chai Charge</span><span>Included</span></div>
+    <div class="total-row"><span>Total</span><span id="totalVal">₹0</span></div>
+    <button class="checkout-btn" onclick="openCheckout()">Checkout Karo →</button>
+  </div>
+</div>
+
+<!-- ===================== CHECKOUT MODAL ===================== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Order Details</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-steps">
+      <div class="dot active" id="dot1"></div>
+      <div class="dot" id="dot2"></div>
+      <div class="dot" id="dot3"></div>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+  const SERVICES = [
+    {
+      id:'compromise', num:'01', emoji:'🤝', title:'Compromise Jaat', hindi:'समझौता जाट',
+      tagline:'Pehle baat, phir haath. Chai pe bulayega, samjhayega, sulah karayega — baat na bani toh maidan taiyar.',
+      includes:['Free Sulah Session (chai included)', '1x Dhamki, agar zaroorat pade', 'Physical fight sirf last resort', 'Agle din follow-up call'],
+      price:1799, gauge:35, level:'SULAH LEVEL'
+    },
+    {
+      id:'aggressive', num:'02', emoji:'🥊', title:'Aggressive Jaat', hindi:'आक्रामक जाट',
+      tagline:'Baat-cheet time waste hai. Seedha entry, seedha josh — is Jaat ke dictionary mein "samjhauta" nahi hai.',
+      includes:['Zero baat-cheet policy', 'Under 5 min reaction time', 'Full Josh Guarantee', 'No refund once josh high ho jaaye'],
+      price:2999, gauge:75, level:'JOSH LEVEL'
+    },
+    {
+      id:'biradri', num:'03', emoji:'🚜', title:'36 Biradri Jaat', hindi:'३६ बिरादरी जाट',
+      tagline:'Akela Jaat kaafi nahi? Poori biradri bulao — 1 Thar, 1 tractor-trolley, aur peeche pura lava.',
+      includes:['1x Modified Thar entry', '1x Tractor-Trolley squad', 'Minimum 15 companions', 'Dhol on request 🥁'],
+      price:8999, gauge:100, level:'DANGA LEVEL'
+    }
+  ];
+
+  let cart = {}; // id -> qty
+
+  function toggleAnthem(){
+    const audio = document.getElementById('anthemAudio');
+    const btn = document.getElementById('radioBtn');
+    const icon = document.getElementById('radioIcon');
+    const label = document.getElementById('radioLabel');
+    if(audio.paused){
+      audio.play().catch(()=>{});
+      btn.classList.add('playing');
+      btn.setAttribute('aria-pressed','true');
+      icon.classList.add('spin');
+      label.textContent = 'Jaat Anthem 🔊';
+    } else {
+      audio.pause();
+      btn.classList.remove('playing');
+      btn.setAttribute('aria-pressed','false');
+      icon.classList.remove('spin');
+      label.textContent = 'Jaat Anthem';
+    }
+  }
+
+  function gaugeSVG(percent){
+    const angle = -90 + (percent/100)*180;
+    return `
+    <svg viewBox="0 0 200 118" width="150" height="90">
+      <defs>
+        <linearGradient id="grad-${percent}" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#3C3B1F"/>
+          <stop offset="50%" stop-color="#DFA623"/>
+          <stop offset="100%" stop-color="#B8420F"/>
+        </linearGradient>
+      </defs>
+      <path d="M20,100 A80,80 0 0 1 180,100" fill="none" stroke="url(#grad-${percent})" stroke-width="14" stroke-linecap="round"/>
+      <g transform="rotate(${angle} 100 100)">
+        <line x1="100" y1="100" x2="100" y2="32" stroke="#221D13" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="100" cy="32" r="4.5" fill="#B8420F"/>
+      </g>
+      <circle cx="100" cy="100" r="9" fill="#221D13"/>
+    </svg>`;
+  }
+
+  function renderServices(){
+    const grid = document.getElementById('servicesGrid');
+    grid.innerHTML = SERVICES.map(s => `
+      <div class="svc-card ${s.id==='biradri' ? 'tier-3' : ''}">
+        <div class="svc-num">${s.num}</div>
+        <div class="svc-top">
+          <div class="svc-emoji">${s.emoji}</div>
+          <div class="svc-title">${s.title}</div>
+        </div>
+        <div class="svc-hindi accent-font">${s.hindi}</div>
+        <p class="svc-tagline">${s.tagline}</p>
+        <div class="gauge-wrap">
+          ${gaugeSVG(s.gauge)}
+          <div class="gauge-label mono">${s.level} · ${s.gauge}%</div>
+        </div>
+        <ul class="svc-includes">
+          ${s.includes.map(i => `<li>${i}</li>`).join('')}
+        </ul>
+        <div class="svc-bottom">
+          <div class="svc-price">₹${s.price.toLocaleString('en-IN')}<span>PER ORDER</span></div>
+          <div id="ctrl-${s.id}">${controlHTML(s.id)}</div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function controlHTML(id){
+    const qty = cart[id] || 0;
+    if(qty === 0){
+      return `<button class="add-btn" onclick="addToCart('${id}')">+ Add to Cart</button>`;
+    }
+    return `
+      <div class="qty-stepper">
+        <button onclick="decQty('${id}')" aria-label="Decrease quantity">−</button>
+        <span>${qty}</span>
+        <button onclick="incQty('${id}')" aria-label="Increase quantity">+</button>
+      </div>`;
+  }
+
+  function refreshControl(id){
+    document.getElementById('ctrl-'+id).innerHTML = controlHTML(id);
+  }
+
+  function addToCart(id){
+    cart[id] = (cart[id]||0) + 1;
+    refreshControl(id);
+    renderCart();
+    pulseCart();
+  }
+  function incQty(id){
+    cart[id] = (cart[id]||0) + 1;
+    refreshControl(id);
+    renderCart();
+  }
+  function decQty(id){
+    cart[id] = (cart[id]||1) - 1;
+    if(cart[id] <= 0) delete cart[id];
+    refreshControl(id);
+    renderCart();
+  }
+  function removeFromCart(id){
+    delete cart[id];
+    refreshControl(id);
+    renderCart();
+  }
+
+  function pulseCart(){
+    const btn = document.getElementById('cartCount');
+    btn.style.transform = 'scale(1.35)';
+    setTimeout(()=> btn.style.transform = 'scale(1)', 180);
+  }
+
+  function cartTotal(){
+    return Object.entries(cart).reduce((sum,[id,qty])=>{
+      const s = SERVICES.find(x=>x.id===id);
+      return sum + (s ? s.price*qty : 0);
+    },0);
+  }
+  function cartCount(){
+    return Object.values(cart).reduce((a,b)=>a+b,0);
+  }
+
+  function renderCart(){
+    const count = cartCount();
+    document.getElementById('cartCount').textContent = count;
+    const body = document.getElementById('drawerBody');
+    const foot = document.getElementById('drawerFoot');
+
+    if(count === 0){
+      body.innerHTML = `<div class="cart-empty"><div class="emoji">🌾</div><p>Cart khaali hai.<br>Koi jhagda nahi, koi Jaat nahi.</p></div>`;
+      foot.style.display = 'none';
+      return;
+    }
+
+    foot.style.display = 'block';
+    body.innerHTML = Object.entries(cart).map(([id,qty])=>{
+      const s = SERVICES.find(x=>x.id===id);
+      return `
+      <div class="cart-item">
+        <div class="cart-item-emoji">${s.emoji}</div>
+        <div class="cart-item-info">
+          <h4>${s.title}</h4>
+          <div class="price mono">₹${s.price.toLocaleString('en-IN')} × ${qty} = ₹${(s.price*qty).toLocaleString('en-IN')}</div>
+          <div class="cart-item-actions">
+            <div class="qty-stepper">
+              <button onclick="decQty('${id}')">−</button>
+              <span>${qty}</span>
+              <button onclick="incQty('${id}')">+</button>
+            </div>
+            <button class="remove-btn" onclick="removeFromCart('${id}')">Remove</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    const total = cartTotal();
+    document.getElementById('subtotalVal').textContent = '₹' + total.toLocaleString('en-IN');
+    document.getElementById('totalVal').textContent = '₹' + total.toLocaleString('en-IN');
+  }
+
+  function openDrawer(){
+    document.getElementById('drawer').classList.add('open');
+    document.getElementById('overlay').classList.add('open');
+  }
+  function closeDrawer(){
+    document.getElementById('drawer').classList.remove('open');
+    if(!document.getElementById('modalOverlay').classList.contains('open')){
+      document.getElementById('overlay').classList.remove('open');
+    }
+  }
+
+  // ---------------- CHECKOUT ----------------
+  let checkoutStep = 1;
+  let address = {name:'', phone:'', place:'', pincode:''};
+  let lastOrderId = '';
+
+  function openCheckout(){
+    if(cartCount() === 0) return;
+    closeDrawer();
+    checkoutStep = 1;
+    document.getElementById('overlay').classList.add('open');
+    document.getElementById('modalOverlay').classList.add('open');
+    renderModalStep();
+  }
+  function closeModal(){
+    document.getElementById('modalOverlay').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  function setDots(step){
+    for(let i=1;i<=3;i++){
+      document.getElementById('dot'+i).classList.toggle('active', i<=step);
+    }
+  }
+
+  function renderModalStep(){
+    setDots(checkoutStep);
+    const body = document.getElementById('modalBody');
+    const title = document.getElementById('modalTitle');
+
+    if(checkoutStep === 1){
+      title.textContent = 'Address Details';
+      body.innerHTML = `
+        <div class="field">
+          <label>PURA NAAM</label>
+          <input type="text" id="f-name" placeholder="e.g. Rohit Sharma" value="${address.name}">
+        </div>
+        <div class="field">
+          <label>PHONE NUMBER</label>
+          <input type="tel" id="f-phone" placeholder="98xxxxxxxx" value="${address.phone}">
+        </div>
+        <div class="field">
+          <label>GAON / SHEHER / SOCIETY</label>
+          <input type="text" id="f-place" placeholder="e.g. Sector 21, Rohini" value="${address.place}">
+        </div>
+        <div class="field">
+          <label>PINCODE</label>
+          <input type="text" id="f-pincode" placeholder="110085" value="${address.pincode}">
+        </div>
+        <div class="modal-actions">
+          <button class="btn-full" style="width:100%" onclick="submitAddress()">Order Review Dekho →</button>
+        </div>
+      `;
+    }
+
+    if(checkoutStep === 2){
+      title.textContent = 'Order Review';
+      const rows = Object.entries(cart).map(([id,qty])=>{
+        const s = SERVICES.find(x=>x.id===id);
+        return `<div class="review-line"><span>${s.emoji} ${s.title} × ${qty}</span><b>₹${(s.price*qty).toLocaleString('en-IN')}</b></div>`;
+      }).join('');
+      body.innerHTML = `
+        <div class="field">
+          <label>DELIVERY ADDRESS</label>
+          <p style="font-size:14px; line-height:1.6; background:#fff; padding:12px 14px; border-radius:9px; border:1.5px solid var(--line);">
+            ${address.name}, ${address.phone}<br>${address.place} — ${address.pincode}
+          </p>
+        </div>
+        ${rows}
+        <div class="review-line" style="border-bottom:none; margin-top:8px;">
+          <span style="font-family:'Anton'; font-size:17px;">TOTAL</span>
+          <b style="font-size:17px;">₹${cartTotal().toLocaleString('en-IN')}</b>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" onclick="checkoutStep=1; renderModalStep();">← Back</button>
+          <button class="btn-full" onclick="placeOrder()">Place Order 🚜</button>
+        </div>
+      `;
+    }
+
+    if(checkoutStep === 3){
+      title.textContent = 'Order Confirmed';
+      body.innerHTML = `
+        <div class="confirm-box">
+          <div class="confirm-tick">✓</div>
+          <h4>Jaat Nikal Chuka Hai! 🚜</h4>
+          <p>Tumhara order confirm ho gaya hai. ETA: jitni der mein ek kadak chai banti hai.</p>
+          <div class="order-id">ORDER ID: ${lastOrderId}</div>
+          <p style="font-size:13px; color:rgba(34,29,19,0.55);">(Ye ek satirical demo hai — koi real Jaat dispatch nahi hua. 😄)</p>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-full" style="width:100%" onclick="resetAfterOrder()">Naya Order Karo</button>
+        </div>
+      `;
+    }
+  }
+
+  function submitAddress(){
+    const name = document.getElementById('f-name').value.trim();
+    const phone = document.getElementById('f-phone').value.trim();
+    const place = document.getElementById('f-place').value.trim();
+    const pincode = document.getElementById('f-pincode').value.trim();
+    if(!name || !phone || !place || !pincode){
+      alert('Sab fields bharo yaar, warna Jaat ko pata kaise chalega kahan jaana hai!');
+      return;
+    }
+    address = {name, phone, place, pincode};
+    checkoutStep = 2;
+    renderModalStep();
+  }
+
+  function placeOrder(){
+    lastOrderId = 'UJ-' + Math.floor(1000 + Math.random()*9000) + '-' + new Date().getFullYear();
+    checkoutStep = 3;
+    renderModalStep();
+  }
+
+  function resetAfterOrder(){
+    cart = {};
+    SERVICES.forEach(s => refreshControl(s.id));
+    renderCart();
+    closeModal();
+  }
+
+  // init
+  renderServices();
+  renderCart();
+</script>
+
+</body>
+</html>
